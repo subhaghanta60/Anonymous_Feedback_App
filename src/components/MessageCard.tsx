@@ -26,7 +26,7 @@ import { useToast } from './ui/use-toast'
 import axios from 'axios'
 import { ApiResponse } from '@/types/ApiResponse'
 import { Message } from '@/models/User'
-
+import { Button } from './ui/button'
   
 type MessageCardProps = {
     message:Message;
@@ -42,7 +42,7 @@ const MessageCard = ({message, onMessageDelete}:MessageCardProps) => {
        const response = await axios.delete<ApiResponse>(`/api/delete-message/${message._id}`)
 
        toast({
-        title:response.data.message
+        title:response.data.message,
        })
        onMessageDelete(message._id)
 
