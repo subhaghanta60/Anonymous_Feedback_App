@@ -25,6 +25,7 @@ import { X } from 'lucide-react'
 import { useToast } from './ui/use-toast'
 import axios from 'axios'
 import { ApiResponse } from '@/types/ApiResponse'
+import { Message } from '@/models/User'
 
   
 type MessageCardProps = {
