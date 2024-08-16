@@ -21,8 +21,9 @@ import { useToast } from '@/components/ui/use-toast';
 import axios, { AxiosError } from 'axios';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { signUpSchema } from '@/schemas/signupSchema';
 
-import { signUpSchema } from '@/schemas/signUpSchema.ts';
+
 
 export default function SignUpForm() {
   const [username, setUsername] = useState('');
@@ -46,11 +47,13 @@ export default function SignUpForm() {
   useEffect(() => {
     const checkUsernameUnique = async () => {
       if (debouncedUsername) {
+        
         setIsCheckingUsername(true);
         setUsernameMessage(''); // Reset message
         try {
-          const response = await axios.get<ApiResponse>(
-            `/api/check-username-unique?username=${debouncedUsername}`
+            
+          const response = await axios.get<ApiResponse>( 
+            `/api/check-username-unique?username=${username}`
           );
           setUsernameMessage(response.data.message);
         } catch (error) {
@@ -119,7 +122,7 @@ export default function SignUpForm() {
                     {...field}
                     onChange={(e) => {
                       field.onChange(e);
-                      setUsername(e.target.value);
+                      debouncedUsername(e.target.value);
                     }}
                   />
                   {isCheckingUsername && <Loader2 className="animate-spin" />}
